@@ -17,10 +17,12 @@ RUN apt-get update && \
     adduser --quiet jenkins && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:password" | chpasswd && \
-    mkdir /home/jenkins/.m2
+    mkdir /home/jenkins/.m2 && mkdir /home/jenkins/.ssh
+    
 
 # Copy authorized keys
 # COPY .ssh/authorized_keys /home/jenkins/.ssh/authorized_keys
+
 COPY .ssh/id_rsa.pub /home/jenkins/.ssh/authorized_keys
 RUN chown -R jenkins:jenkins /home/jenkins/.m2/ && \
     chown -R jenkins:jenkins /home/jenkins/.ssh/
